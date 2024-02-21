@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Музыкальный плеер</title>
+    <style>
+        #player-container {
+            display: flex;
+            align-items: center;
+        }
+
+
+        #album-cover {
+            width: 300px;
+            height: 300px;
+            /* margin-right: 20px; */
+            margin: auto;
+            display: block;
+        }
+        
+/*         #timeline {
+            width: 100%;
+        } */
+        #timeline {
+            width: 50%;
+        }
+
+
+    </style>
+          
+</head>
+<body>
+    <div style="text-align: center;">
+    <h1>Музыкальный плеер</h1>
+    <div id="player-container">
+        <img id="album-cover" class="item__img" src="./via/via.webp" alt="Обложка альбома">
+        <audio id="audioPlayer">
+            <source src="" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио элемент.
+        </audio>
+        
+    </div>
+    <input type="range" id="timeline" min="0" value="0">
+
+    <div id="controls">
+        <button id="playButton">Пуск</button>
+        <button id="pauseButton">Пауза</button>
+        <button id="stopButton">Стоп</button>
+    </div>
+    <br>
+    <label for="songSelect">Выберите песню:</label>
+    <select id="songSelect">
+        <option value="">(Нет)</option>
+        <option value="./via/01.-Demobilizacziya.mp3">Демобилизация</option>
+        <option value="./via/02.-Svadba.mp3">Свадьба</option>
+        <option value="./via/03.-Roga.mp3">Рога</option>
+        <option value="./via/04.-Selskij-Tualet.mp3">Сельский Туалет</option>
+        <option value="./via/05.-Gryaznaya-Krov.mp3">Грязная Кровь</option>
+        <option value="./via/06.-Lyubov-Zagrobnaya.mp3">Любовь Загробная</option>
+        <option value="./via/07.-CHernyj-Vurdalak.mp3">Чёрный Вурдалак</option>
+        <option value="./via/08.-Istrebiteli-Vampirov.mp3">Истребители Вампиров</option>
+        <option value="./via/09.-Sozhennaya-Vedma.mp3">Соженная Вельма</option>
+        <option value="./via/10.-Noch-Straha.mp3">Ночь Страха</option>
+        <option value="./via/11.-Mertvyj-V-Dome.mp3">Мёртвый В Доме</option>
+        <option value="./via/12.-Svyataya-Vojna.mp3">Святая Война</option>    
+        <option value="./via/13.-Vosstavshij-Iz-Ada.mp3">Восставший Из Ада</option>            
+        <!-- Добавьте остальные песни -->
+    </select>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const stopButton = document.getElementById('stopButton');
+        const timeline = document.getElementById('timeline');
+        const songSelect = document.getElementById('songSelect');
+
+        playButton.addEventListener('click', () => {
+            audioPlayer.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audioPlayer.pause();
+        });
+
+        stopButton.addEventListener('click', () => {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            timeline.max = audioPlayer.duration;
+        });
+
+        timeline.addEventListener('input', () => {
+            audioPlayer.currentTime = timeline.value;
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            timeline.value = audioPlayer.currentTime;
+        });
+
+        songSelect.addEventListener('change', () => {
+            audioPlayer.src = songSelect.value;
+            audioPlayer.load();
+            audioPlayer.play();
+        });
+    </script>
+
+</body>
+
+</html>
