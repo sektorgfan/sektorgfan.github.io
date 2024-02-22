@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../styles/css/style.css">
+    <!-- <link rel="stylesheet" href="./fonts/alaruss.css"> -->
+    <title>Музыкальный плеер</title>
+    <style>
+        #player-container {
+            display: flex;
+            align-items: center;
+        }
+
+
+        #album-cover {
+            width: 300px;
+            height: 300px;
+            /* margin-right: 20px; */
+            margin: auto;
+            display: block;
+        }
+        
+/*         #timeline {
+            width: 100%;
+        } */
+        #timeline {
+            width: 50%;
+        }
+
+
+    </style>
+        <!-- <div class="theme">
+            <input type="checkbox" onchange="handleChange(this.checked)" />
+            Light Theme
+        </div> -->
+        <!-- <div class="toggle-switch">
+            <label class="switch-label">
+              <input type="checkbox" onchange="handleChange(this.checked)" class="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>   -->
+          
+</head>
+<!-- <script>
+    const handleChange = (isChecked) => {
+        if (isChecked) {
+            document.body.setAttribute('light', '')
+        } else{
+            document.body.removeAttribute('light')
+        }
+    }
+</script> -->
+<body>
+    <div style="text-align: center;">
+    <h1>Музыкальный плеер</h1>
+    <div id="player-container">
+        <img id="album-cover" class="item__img" src="../vnl/vnl.jfif" alt="Обложка альбома">
+        <audio id="audioPlayer">
+            <source src="" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио элемент.
+        </audio>
+        
+    </div>
+    <input type="range" id="timeline" min="0" value="0">
+
+    <div id="controls">
+        <button id="playButton">Пуск</button>
+        <button id="pauseButton">Пауза</button>
+        <button id="stopButton">Стоп</button>
+    </div>
+    <br>
+    <label for="songSelect">Выберите песню:</label>
+    <select id="songSelect">
+        <!-- Неизданное -->
+        <option value="">(Нет)</option>
+        <option value="../vnl/01. Вступление (1981).mp3">Вступление (1981)</option>
+        <option value="../vnl/02. Без вина (1981).mp3">Без вина (1981)</option>
+        <option value="../vnl/03. Подруга шестиструнная.mp3">Подруга шестиструнная</option>
+        <option value="../vnl/04. Про лето.mp3">Про лето</option>
+        <option value="../vnl/05. Милая.mp3">Милая</option>
+        <option value="../vnl/06. Первая любовь.mp3">Первая любовь</option>
+        <option value="../vnl/07. Проходят годы словно миг.mp3">Проходят годы словно миг</option>
+        <option value="../vnl/08. Про мальчишку.mp3">Про мальчишку</option>
+        <option value="../vnl/09. Вой на луну.mp3">Вой на луну</option>
+        <option value="../vnl/10. Людмила.mp3">Людмила</option>
+        <option value="../vnl/11. Он так ее любил.mp3">Он так ее любил</option>
+        <option value="../vnl/12. Вампиры (1985).mp3">Вампиры (1985)</option>
+        <option value="../vnl/13. Заключительная.mp3">Заключителная</option>
+        <!-- Лучшее -->
+        <option value="../ga/04.-30-let.mp3">30 лет</option>
+        <option value="../ga/06.-Tuman.mp3">Туман</option>
+        <option value="../num/11.-Pora-domoj.mp3">Пора домой</option>
+        <option value="../nng/09.-Lirika.mp3">Лирика</option>
+        <option value="../via/01.-Demobilizacziya.mp3">Демобилизация</option>
+        <option value="../ga/07.-Tvoj-zvonok.mp3">Твой звонок</option>
+        <option value="../gm/00.-Bomzh.mp3">Бомж</option>
+        <option value="../nng/06.-Vzyal-vinu-na-sebya.mp3">Взял вину на себя</option>
+        <option value="../npr/14.-Noch-pered-rozhdestvom.mp3">Ночь перед рождеством</option>
+        <option value="../ga/05.-Life.mp3">Life</option>
+        <option value="../yv/12.-Vecherom-na-lavochke.mp3">Вечером на лавочке</option>
+        <option value="../yv/13.-Vozle-doma-tvoego.mp3">Возле дома твоего</option>
+        <option value="../npr/02.-YAva.mp3">Ява</option>
+        <!-- Добавьте остальные песни -->
+    </select>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const stopButton = document.getElementById('stopButton');
+        const timeline = document.getElementById('timeline');
+        const songSelect = document.getElementById('songSelect');
+
+        playButton.addEventListener('click', () => {
+            audioPlayer.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audioPlayer.pause();
+        });
+
+        stopButton.addEventListener('click', () => {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            timeline.max = audioPlayer.duration;
+        });
+
+        timeline.addEventListener('input', () => {
+            audioPlayer.currentTime = timeline.value;
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            timeline.value = audioPlayer.currentTime;
+        });
+
+        songSelect.addEventListener('change', () => {
+            audioPlayer.src = songSelect.value;
+            audioPlayer.load();
+            audioPlayer.play();
+        });
+    </script>
+
+</body>
+
+</html>
