@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../styles/css/style.css">
+    <!-- <link rel="stylesheet" href="./fonts/alaruss.css"> -->
+    <title>Музыкальный плеер</title>
+    <style>
+        #player-container {
+            display: flex;
+            align-items: center;
+        }
+
+
+        #album-cover {
+            width: 300px;
+            height: 300px;
+            /* margin-right: 20px; */
+            margin: auto;
+            display: block;
+        }
+        
+/*         #timeline {
+            width: 100%;
+        } */
+        #timeline {
+            width: 50%;
+        }
+
+
+    </style>
+        <!-- <div class="theme">
+            <input type="checkbox" onchange="handleChange(this.checked)" />
+            Light Theme
+        </div> -->
+        <!-- <div class="toggle-switch">
+            <label class="switch-label">
+              <input type="checkbox" onchange="handleChange(this.checked)" class="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>   -->
+          
+</head>
+<!-- <script>
+    const handleChange = (isChecked) => {
+        if (isChecked) {
+            document.body.setAttribute('light', '')
+        } else{
+            document.body.removeAttribute('light')
+        }
+    }
+</script> -->
+<body>
+    <div style="text-align: center;">
+    <h1>Музыкальный плеер</h1>
+    <div id="player-container">
+        <img id="album-cover" class="item__img" src="../zm/zm.webp" alt="Обложка альбома">
+        <audio id="audioPlayer">
+            <source src="" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио элемент.
+        </audio>
+        
+    </div>
+    <input type="range" id="timeline" min="0" value="0">
+
+    <div id="controls">
+        <button id="playButton">Пуск</button>
+        <button id="pauseButton">Пауза</button>
+        <button id="stopButton">Стоп</button>
+    </div>
+    <br>
+    <label for="songSelect">Выберите песню:</label>
+    <select id="songSelect">
+        <option value="">(Нет)</option>
+        <option value="../zm/01.-Oj-ty-travushka-zelenaya.mp3">Ой, ты, травушка зелёная</option>
+        <option value="../zm/02.-Sifon.mp3">Сифон</option>
+        <option value="../zm/03.-Ku-ku.mp3">Ку-ку</option>
+        <option value="../zm/04.-Russkij-mat.mp3">Русский мат</option>
+        <option value="../zm/05.-Bez-vina.mp3">Без вина</option>
+        <option value="../zm/06.-Goluboj.mp3">Голубой</option>
+        <option value="../zm/07.-Strah.mp3">Страх</option>
+        <option value="../zm/08.-Nas-zhdut-iz-temnoty.mp3">Нас ждут из темноты</option>
+        <option value="../zm/09.-Vampiry.mp3">Вампиры</option>
+        <option value="../zm/10.-Moya-smert.mp3">Моя смерть</option>
+        <option value="../zm/11.-Kogda-pomresh.mp3">Когда помрёшь</option>
+        <option value="../zm/12.-CHernaya-magiya.mp3">Чёрная магия</option>       
+        <!-- Добавьте остальные песни -->
+    </select>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const stopButton = document.getElementById('stopButton');
+        const timeline = document.getElementById('timeline');
+        const songSelect = document.getElementById('songSelect');
+
+        playButton.addEventListener('click', () => {
+            audioPlayer.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            audioPlayer.pause();
+        });
+
+        stopButton.addEventListener('click', () => {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            timeline.max = audioPlayer.duration;
+        });
+
+        timeline.addEventListener('input', () => {
+            audioPlayer.currentTime = timeline.value;
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            timeline.value = audioPlayer.currentTime;
+        });
+
+        songSelect.addEventListener('change', () => {
+            audioPlayer.src = songSelect.value;
+            audioPlayer.load();
+            audioPlayer.play();
+        });
+    </script>
+
+</body>
+
+</html>
