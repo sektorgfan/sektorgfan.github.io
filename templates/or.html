@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EX Сектор Газа</title>
+<style>
+  
+    /* 
+      Regular
+    */
+
+    @font-face {
+      font-family: 'Wir.Berlin Scrift';
+      src: url('./WEB/BerlinTypeWeb-Regular.eot');
+      src: local('Wir.Berlin Scrift'), local('BerlinTypeWeb-Regular'),
+        url('./WEB/BerlinTypeWeb-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./WEB/BerlinTypeWeb-Regular.woff') format('woff'),
+        url('./WEB/BerlinTypeWeb-Regular.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    /* 
+      Bold 
+    */
+
+    @font-face {
+      font-family: 'Wir.Berlin Scrift Bold';
+      src: url('./WEB/BerlinTypeWeb-Bold.eot');
+      src: local('Wir.Berlin Scrift Bold'), local('BerlinTypeWeb-Bold'),
+        url('./WEB/BerlinTypeWeb-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./WEB/BerlinTypeWeb-Bold.woff') format('woff'),
+        url('./WEB/BerlinTypeWeb-Bold.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    body{
+        text-align: center;
+        font-family: 'Wir.Berlin Scrift';
+    }
+    /* Стили для плеера и плейлиста */
+    #audioPlayer {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+    #playlist {
+      list-style: none;
+      padding: 0;
+    }
+    #playlist li {
+      cursor: pointer;
+      padding: 10px; /* Добавлено для большей области нажатия на мобильных устройствах */
+    }
+    #playlist li:hover {
+      background-color: #f0f0f0;
+    }
+    .albumCover {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    width: 300px;
+    border-radius: 10%;
+    }
+      /* Медиа-запрос для телефонов */
+    @media only screen and (max-width: 600px) {
+        #playlist li {
+            padding: 20px; /* Увеличиваем размер строки выбора песни для телефонов */
+        }
+    }
+  </style>
+</head>
+<body>
+<img class="albumCover" src="../or/cover.jpg" alt="Обложка альбома"><br>
+<audio id="audioPlayer" controls>
+  <source src="" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<div id="currentSong">Сейчас играет: </div>
+
+<ul id="playlist">
+  <li data-src="../or/1.Sektor_Gaza.mp3">Сектор Газа</li>
+  <li data-src="../or/2.Hutorok.mp3">Хуторок</li>
+  <li data-src="../or/3.Horoshij_denj.mp3">Хороший День</li>
+  <li data-src="../or/4.Ozornoj_malchishka.mp3">Озорной Мальчишка</li>
+  <li data-src="../or/5.Ne_Dam.mp3">Не Дам</li>
+  <li data-src="../or/6.U_Jara.mp3">У Яра</li>
+  <li data-src="../or/7.Zhena.mp3">Жена</li>
+  <li data-src="../or/8.Pogul'ali.mp3">Погуляли</li>
+  <li data-src="../or/9.Dopils'a.mp3">Допился</li>
+  <li data-src="../or/10.Chukcha.mp3">Чукча</li>
+  <li data-src="../or/11.Ognennij_Raj.mp3">Огненный Рай</li>
+  <li data-src="../or/12.Ona_odna.mp3">Она Одна</li>
+  <li data-src="../or/13.Devushkam.mp3">Девушкам</li>
+  <li data-src="../or/14.Dol'a_soldatskaya.mp3">Доля Солдатская</li>
+  <li data-src="../or/15.Ved'mi.mp3">Ведьмы</li>
+  <li data-src="../or/16.Spor.mp3">Спор</li>
+  <li data-src="../or/17.Yava.mp3">Ява</li>
+  <li data-src="../or/18.HK_Voronezh.mp3">ХК Воронеж</li>
+  <li data-src="../or/19.Oboroten'.mp3">Оборотень</li>
+</ul>
+
+<script>
+    // JavaScript для управления плеером и плейлистом
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playlistItems = document.querySelectorAll('#playlist li');
+    const currentSongElement = document.getElementById('currentSong');
+    const albumCoverElement = document.getElementById('albumCover');
+  
+    // Функция для загрузки и воспроизведения трека
+    function playTrack(trackSrc, trackName, albumCoverSrc) {
+      audioPlayer.src = trackSrc;
+      audioPlayer.play();
+      currentSongElement.textContent = "Сейчас играет: " + trackName;
+      albumCoverElement.src = albumCoverSrc;
+    }
+  
+    // Добавляем обработчик события для каждого элемента плейлиста
+    playlistItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const trackSrc = this.getAttribute('data-src');
+        const trackName = this.textContent;
+        const albumCoverSrc = this.getAttribute('data-cover');
+        playTrack(trackSrc, trackName, albumCoverSrc);
+      });
+    });
+  </script>
+
+</body>
+</html>
